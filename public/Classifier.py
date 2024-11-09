@@ -1,19 +1,24 @@
 from groq import Groq
 import groq
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+api_key = os.getenv("LLAMA_API_KEY")
+print(api_key)
+
+client = Groq(
+    api_key=api_key,
+)
 # Inicializa el historial de mensajes como una lista vacía
 historial_mensajes = []
-
-# Inicializa el cliente de Groq
-client = Groq(
-    api_key="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",
-)
 
 def obtener_respuesta(mensaje_usuario):
     # Añade el mensaje del usuario al historial
     historial_mensajes.append({
         "role": "user",
         "content": mensaje_usuario,
+    
     })
 
     # Crea la llamada a la API con el historial completo de mensajes
