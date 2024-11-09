@@ -9,11 +9,18 @@ const { href, user, body } = Astro.props;
 ---
 
 <div class="bg-white rounded-xl p-3 relative shadow">
-	<div class="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full"></div>
 	
 	<div class="flex space-x-3 items-center">
-		<img src={href} alt={user} class="w-8 h-8 rounded-full object-cover">
+        <img src={href} alt={user} class="w-10 h-10 rounded-full object-cover border-2 border-fuchsia-500">
 		<h3 class="font-medium">{user}</h3>
 	</div>
-	<p class="mt-2 text-sm text-gray-500">{body}</p>
+	<p class="mt-4 text-sm text-gray-500 mr-5 ml-1">{body}</p>
+
+    
+
+
+	<button class="bg-fuchsia-100 text-fuchsia-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded  transition hover:bg-fuchsia-200 mt-5"> Open with Instagram </button>
+
+    <button class="bg-fuchsia-100 text-fuchsia-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded  transition hover:bg-fuchsia-200 mt-2"> Answer with AI </button>
+ 
 </div>
