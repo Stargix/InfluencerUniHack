@@ -5,7 +5,6 @@ import os
 
 load_dotenv()
 api_key = os.getenv("LLAMA_API_KEY")
-print(api_key)
 
 client = Groq(
     api_key=api_key,

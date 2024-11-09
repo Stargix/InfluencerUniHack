@@ -4,6 +4,7 @@ import Card from '../components/Card.astro';
 import Nav from '../components/Nav.astro';
 import Search from '../components/Search.astro';
 import Mensaje from '../components/Mensaje.astro';
+import Persona from '../components/Persona.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -74,52 +75,16 @@ import Mensaje from '../components/Mensaje.astro';
 				<div>
 					<h2 class="text-sm font-medium mb-3">All Chats</h2>
 					<div class="space-y-3">
-						<div class="flex items-center space-x-3">
-							<img src="/placeholder.svg?height=40&width=40" alt="Hasima Medvedeva" class="w-10 h-10 rounded-full object-cover">
-							<div class="flex-1">
-								<div class="flex items-center justify-between">
-									<h3 class="font-medium">Hasima Medvedeva</h3>
-									<span class="text-xs text-gray-400">12:23</span>
-								</div>
-								<div class="flex items-center space-x-1 text-sm text-gray-500">
-									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-									</svg>
-									<span>Records a voice message</span>
-								</div>
-							</div>
-						</div>
+
+						<Persona user='Kalista Rekev' href='/placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
+
+						<Persona user='Kalista Rekev' href='/placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
+
+						<Persona user='Kalista Rekev' href='/placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
+
+						<Persona user='Kalista Rekev' href='/placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
 		
-						<div class="flex items-center space-x-3">
-							<div class="relative">
-								<img src="/placeholder.svg?height=40&width=40" alt="Nextlo Team" class="w-10 h-10 rounded-full object-cover">
-								<div class="absolute top-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-							</div>
-							<div class="flex-1">
-								<div class="flex items-center justify-between">
-									<h3 class="font-medium">Nextlo Team</h3>
-									<span class="text-xs text-gray-400">12:13</span>
-								</div>
-								<p class="text-sm text-gray-500">Daniel is typing...</p>
-							</div>
-						</div>
 		
-						<div class="flex items-center space-x-3">
-							<img src="/placeholder.svg?height=40&width=40" alt="Anatoly Ferusso" class="w-10 h-10 rounded-full object-cover">
-							<div class="flex-1">
-								<div class="flex items-center justify-between">
-									<h3 class="font-medium">Anatoly Ferusso</h3>
-									<span class="text-xs text-gray-400">11:53</span>
-								</div>
-								<div class="flex items-center space-x-1">
-									<p class="text-sm text-gray-500">Sorry for the delay</p>
-									<span class="text-sm">😅</span>
-									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-									</svg>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

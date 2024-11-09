@@ -1,0 +1,22 @@
+---
+interface Props {
+	user: string;
+	body: string;
+	href: string;
+    hour: string;
+}
+
+const { href, user, body, hour } = Astro.props;
+---
+
+<div class="flex items-center space-x-3">
+    <img src={href} alt={user} class="w-10 h-10 rounded-full object-cover">
+    <div class="flex-1">
+        <div class="flex items-center justify-between">
+            <h3 class="font-medium">{user}</h3>
+            <span class="text-xs text-gray-400">{hour}</span>
+        </div>
+        <p class="text-sm text-gray-500">{body}</p>
+        
+    </div>
+</div>
