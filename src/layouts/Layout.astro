@@ -8,43 +8,82 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Astro description" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta name="generator" content={Astro.generator} />
+	<title>{title}</title>
+	<style is:global>
+		:root {
+			--accent: 136, 58, 234;
+			--accent-light: 224, 204, 250;
+			--accent-dark: 49, 10, 101;
+			--accent-gradient: linear-gradient(
+				45deg,
+				rgb(var(--accent)),
+				rgb(var(--accent-light)) 30%,
+				white 60%
+			);
+		}
+		html {
+			font-family: system-ui, sans-serif;
+			background: #f9fafb; /* Cambié el fondo para que coincida con el estilo del componente */
+		}
+		body {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+		}
+		.container {
+			margin: auto;
+			width: 100%;
+			max-width: 768px; /* Ajusta según sea necesario */
+			padding: 16px;
+			background: white; /* Fondo blanco para el contenido */
+			border-radius: 8px; /* Esquinas redondeadas */
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+		}
+		/* Agrega más estilos aquí según sea necesario */
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="flex items-center justify-between">
+			<h1 class="text-xl font-semibold">Messages</h1>
+			<div class="h-8 w-8 rounded-full bg-zinc-100"></div>
+		</div>
+
+		<div class="w-full whitespace-nowrap overflow-x-auto">
+			<div class="flex w-full gap-3 py-2">
+				<!-- Aquí puedes agregar los usuarios como en el componente de React -->
+				<div class="flex flex-col items-center gap-1">
+					<div class="relative">
+						<img alt="Daniel" class="h-12 w-12 rounded-full object-cover" height="48" src="/placeholder.svg?height=40&width=40" width="48">
+						<div class="absolute right-0 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-500"></div>
+					</div>
+					<span class="text-sm">Daniel</span>
+				</div>
+				<!-- Repite para otros usuarios -->
+			</div>
+		</div>
+
+		<div class="relative">
+			<input class="pl-8" placeholder="Search or start of message" type="search">
+			<svg class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 4a6 6 0 100 12 6 6 0 000-12zM21 21l-4.35-4.35"></path>
+			</svg>
+		</div>
+
+		<div class="space-y-4">
+			<div>
+				<h2 class="mb-3 text-sm font-medium">Pinned Chats</h2>
+				<div class="grid gap-3 sm:grid-cols-2">
+					<div class="relative overflow-hidden p-3 border">
+						<div class="absolute right-2 top-2 h-2 w-2 rounded-full bg-green-500"></div>
+						<img alt="Profile" class="mb-2 h-16 w-16 rounded-full object-cover" height="64" src="/placeholder.svg?height=64&width=64" width="64">
+						<h3 class="font-medium">George Lobko</h3>
+						
