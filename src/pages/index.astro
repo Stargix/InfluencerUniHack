@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Nav from '../components/Nav.astro';
+import Search from '../components/Search.astro';
+import Mensaje from '../components/Mensaje.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -52,28 +54,20 @@ import Nav from '../components/Nav.astro';
 					</div>
 				</div>
 		
-				<div class="relative">
-					<input type="text" placeholder="Search or start of message" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-					</svg>
-				</div>
-		
+				<Search/>
+				
 				<div>
 					<h2 class="text-sm font-medium mb-3">Pinned Chats</h2>
-					<div class="grid grid-cols-2 gap-3">
-						<div class="bg-white rounded-xl p-3 relative shadow">
-							<div class="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full"></div>
-							<img src="/placeholder.svg?height=64&width=64" alt="George Lobko" class="w-16 h-16 rounded-full object-cover mb-2">
-							<h3 class="font-medium">George Lobko</h3>
-							<p class="text-sm text-gray-500">Thanks for the quick...</p>
-						</div>
-						<div class="bg-white rounded-xl p-3 relative shadow">
-							<div class="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-black text-xs">2</div>
-							<img src="/placeholder.svg?height=64&width=64" alt="Amelia Korns" class="w-16 h-16 rounded-full object-cover mb-2">
-							<h3 class="font-medium">Amelia Korns</h3>
-							<p class="text-sm text-gray-500">I'm stuck in traffic...</p>
-						</div>
+					<div class="grid gap-3">
+
+						<Mensaje user='George Lobko' 
+						href='/placeholder.svg?height=40&width=40'
+						body='Thanks for the quick'/>
+
+						<Mensaje user='Amelia Peries' 
+						href='/placeholder.svg?height=40&width=40'
+						body="I'm stuck in traffic"/>
+
 					</div>
 				</div>
 		
