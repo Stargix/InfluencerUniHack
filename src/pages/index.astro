@@ -1,63 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import Nav from '../components/Nav.astro';
-import Search from '../components/Search.astro';
 import Mensaje from '../components/Mensaje.astro';
-import Persona from '../components/Persona.astro';
-import Cantidad from '../components/Cantidad.astro';
+
+// Fetch data from the FastAPI endpoint
+const response = await fetch('http://127.0.0.1:8000/messages');
+const messages = await response.json();
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-
-		<body class="bg-gradient-to-b from-purple-light to-white min-h-screen p-4">
-
-			<div class="relative pt-8 pb-10 mb-12">
-				<h1 class="text-5xl md:text-6xl font-extrabold text-center relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 to-pink-600">
-				  Influsend
-				</h1>
-
-				
-
-				<div class="absolute inset-0 blur-[64px] bg-gradient-to-r from-fuchsia-500/20 to-pink-600/20 z-0"></div>
-				<div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-fuchsia-500 to-pink-600 flex justify-center items-center"><Cantidad cantidad={11}/></div>
-				
-			  </div>
-		
-				<div>
-					
-					<div class="grid gap-3">
-
-						<Mensaje user='George Lobko' 
-						href='/placeholder.svg?height=40&width=40'
-						fecha='10.23'
-						body="Hey! It’s been a minute! How about coffee or lunch sometime soon? I’d love to catch up and hear all about what you’ve been up to."/>
-
-						<Mensaje user='Amelia Peries' 
-						href='/placeholder.svg?height=40&width=40'
-						fecha='14.12'
-						body="I'm stuck in traffic"/>
-
-					</div>
-				</div>
-				<Search/>
-				<div>
-					<h2 class="text-sm font-medium mb-3">All Chats</h2>
-					<div class="space-y-3">
-
-						<Persona user='Kalista Rekev' href='placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
-
-						<Persona user='Kalista Rekev' href='placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
-
-						<Persona user='Kalista Rekev' href='placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
-
-						<Persona user='Kalista Rekev' href='placeholder.svg?height=40&width=40' hour='10.23' body='I hate marshmello'/>
-		
-		
-					</div>
-				</div>
-			</div>
-
-	</main>
+<Layout title="Welcome to Astro">
+  <main>
+    <body class="bg-gradient-to-b from-purple-light to-white min-h-screen p-4">
+      <div class="relative pt-8 pb-10 mb-12">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-center relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 to-pink-600">
+          Influsend
+        </h1>
+        <div class="absolute inset-0 blur-[64px] bg-gradient-to-r from-fuchsia-500/20 to-pink-600/20 z-0"></div>
+      </div>
+      
+      <!-- Render each message as a Mensaje component -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+		{messages.map(message => (
+		  <Mensaje 
+			user={`User ${message.user_id}`} 
+			href='/placeholder.svg?height=40&width=40'
+			fecha='10.23'
+			body={message.message} 
+		  />
+		))}
+	  </div>
+	  
+    </body>
+  </main>
 </Layout>
+

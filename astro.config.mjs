@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   server: {
-    port: 8080, // Change the port to 8080
+    port: 8000, // Change the port to 8000
   },
 
   integrations: [tailwind()],

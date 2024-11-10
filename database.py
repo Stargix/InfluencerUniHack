@@ -76,3 +76,14 @@ def print_database_contents():
         print(f"An error occurred while accessing the database: {e}")
     finally:
         con.close()
+
+def get_all_messages():
+    """Retrieve all messages from the 'business_prop' table in SQLite."""
+    try:
+        con = sqlite3.connect("jobOffers.db")
+        cur = con.cursor()
+        cur.execute("SELECT message_id, user_id, message FROM business_prop")
+        rows = cur.fetchall()
+        return [{"message_id": row[0], "user_id": row[1], "message": row[2]} for row in rows]
+    finally:
+        con.close()
