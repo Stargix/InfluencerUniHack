@@ -3,9 +3,10 @@
 ---
 <div class="fixed flex justify-center w-full max-w-md mx-auto bottom-0 left-0 right-0 mb-7">
     <input 
+      id="busca"
       type="text" 
       placeholder="Search messages" 
-      class="w-full pl-12 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-full text-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition duration-200 ease-in-out"
+      class="w-full pl-12 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-full text-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-700 focus:border-transparent transition duration-200 ease-in-out"
     >
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
@@ -23,3 +24,28 @@
     </svg>
   </div>
   
+
+  <script>
+
+var input = document.getElementById('busca');
+
+if (input) {
+  // Agregamos un evento para cuando se presiona una tecla
+  input.addEventListener('keydown', function(event) {
+    // Verificamos si la tecla presionada es 'Enter' (código 13)
+    if (event.key === 'Enter') {
+      // Obtener el valor del input
+      if (input) {
+        var valor = (input as HTMLInputElement).value;
+        
+        // Usamos el valor (puedes hacer lo que desees con él)
+        console.log('El valor del input es:', valor);
+        
+        // Opcionalmente, puedes limpiar el input después de presionar Enter
+        (input as HTMLInputElement).value = '';  // Esto limpiará el input
+      }
+    }
+  });
+}
+
+  </script>
