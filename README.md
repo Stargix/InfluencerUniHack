@@ -1,54 +1,67 @@
-# Astro Starter Kit: Basics
+# INFLUSEND
+This web application helps influencers automatically categorize their Instagram messages. By integrating with the Instagram API, the application fetches all incoming messages and, with the help of an OpenAI API, classifies each message into two categories: **Business** or **Personal**. This allows influencers to easily spot collaboration or business opportunities without manually reviewing every message.
 
-```sh
-npm create astro@latest -- --template basics
-```
+## Features
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+- **Instagram Message Access:** Connects to the user's Instagram API to retrieve direct messages.
+- **AI-based Message Classification:** Uses the OpenAI API to analyze and classify each message as **Business** or **Non-Relevant**.
+- **Dashboard View:** At the end of the day, influencers can see an organized list of messages categorized as **Business** to make sure no opportunity is missed.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Installation
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/username/project-name.git
+   
+2. API keys: you need to have an .env document with the API credentials
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## AI agent 
+The core functionality of this application relies on an AI agent designed to interpret and classify the direct messages (DMs) received on Instagram. The AI agent is specifically trained to identify and differentiate **business offers** from other types of messages, allowing influencers to focus on relevant opportunities without sorting through each message manually.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### How the AI Agent Works
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. **Message Analysis:** Each DM is sent to the AI agent, which leverages OpenAI’s natural language processing (NLP) capabilities. The agent analyzes the message text, searching for phrases, patterns, and context that might indicate whether the message is related to **business** or is **non-relevant** (e.g., personal or casual).
 
-Any static assets, like images, can be placed in the `public/` directory.
+2. **Classification Criteria:** The AI agent is trained to distinguish business-related messages from personal ones based on specific cues, including:
+   - **Business Messages**: Messages that mention collaborations, sponsorships, product placements, or business inquiries.
+   - **Non-Relevant Messages**: Messages that are casual, personal, or unrelated to business matters.
+   
+3. **High Accuracy:** Thanks to targeted training, the AI agent achieves a high classification accuracy, simplifying the influencer's inbox. Only messages likely to be business-relevant are displayed in the dashboard, ensuring no potential opportunity is missed.
 
-## 🧞 Commands
+### Benefits of AI-Powered Classification
 
-All commands are run from the root of the project, from a terminal:
+- **Efficient Sorting:** Automates the sorting of messages, significantly reducing the time spent managing incoming DMs.
+- **Prioritized Inbox:** Ensures that important business-related messages are highlighted and easily accessible for review at the end of the day.
+- **Continuous Improvement:** As the AI agent processes more data, it continues to improve its classification accuracy over time.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+This AI-driven classification system is central to the application, streamlining message management and enabling influencers to stay focused on valuable business connections.
 
-## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Instructions
+   - npm run dev
+   - ngrok http 0808
+   - uvicorn main:app --reload
+
+## WEB - Fronted Interface
+
+The web interface is designed to help influencers manage and respond to business messages on Instagram more efficiently. Below is an overview of its main components:
+
+1. **User Cards:** Each card on the interface represents a user who has sent a message. For influencers, this will typically include brands or businesses reaching out with work or collaboration proposals. Each card shows:
+   - **User’s Name:** The name of the Instagram user- company.
+   - **Message Preview:** A preview of the message content.
+   - **Timestamp:** The time when the message was received.
+
+2. **Action Buttons:**
+   - **Open Instagram:** This button redirects the influencer to the specific conversation on Instagram, allowing them to respond directly within the app.
+   - **Answer with AI:** This button (currently in development) is intended to generate a suggested response using AI, making it faster and easier to reply to business offers.
+     ⚠️ This feature is still under construction and is listed under future improvements.
+
+3. **Search Bar:** A search feature at the bottom of the interface allows users to quickly locate specific offers or messages by typing keywords, making it easier to manage a high volume of incoming messages.
+
+#### Future Improvements ⚠️ 🔜
+- **AI-Generated Responses:** The “Answer with AI” button will soon allow influencers to generate an AI-powered response draft. This feature is intended to save time by automatically creating personalized replies based on the message content and context.
+
+This interface provides a centralized and streamlined way for influencers to focus on potential business collaborations, reducing the need to manually sift through each Instagram message.
+
