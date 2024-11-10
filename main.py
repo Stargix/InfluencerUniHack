@@ -8,6 +8,7 @@ import requests  # For making HTTP requests
 from typing import Dict, Any  # For type hints
 from datetime import datetime  # For timestamp generation
 import database as db
+import Classifier as ai
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,27 +20,6 @@ app = FastAPI()
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")  # Token for webhook verification
 PAGE_ACCESS_TOKEN = os.getenv("PAGE_ACCESS_TOKEN")  # Token for Instagram API access
 INSTAGRAM_GRAPH_URL = "https://graph.facebook.com/v13.0"  # Base URL for Instagram Graph API
-
-class MessageClassifier:
-    """Class to classify incoming messages as business or non-business related"""
-    def __init__(self):
-        # Define keywords that indicate a business-related message
-        self.business_keywords = {
-            'price', 'cost', 'quote', 'service', 'business', 'project',
-            'work', 'hire', 'contract', 'consultation', 'interested',
-            'budget', 'proposal', 'inquiry', 'commission'
-        }
-
-    def is_business_opportunity(self, message: str) -> bool:
-        """
-        Check if message contains business-related keywords
-        Args:
-            message: The input message text
-        Returns:
-            bool: True if message contains business keywords, False otherwise
-        """
-        message_lower = message.lower()
-        return any(keyword in message_lower for keyword in self.business_keywords)
 
 class InstagramAPI:
     """Class to handle Instagram API interactions"""
@@ -112,7 +92,6 @@ class ResponseGenerator:
         return "Thanks for your message! I'll get back to you soon. 👋"
 
 # Initialize necessary components
-classifier = MessageClassifier()
 instagram_api = InstagramAPI(PAGE_ACCESS_TOKEN)
 response_generator = ResponseGenerator()
 
@@ -166,7 +145,7 @@ async def webhook(request: Request):
         print(f"Received message from {sender_id}: {message_text}")
 
         # Classify message and generate appropriate response
-        is_business = classifier.is_business_opportunity(message_text)
+        is_business = ai.is_business_proposal(message_text)
         # response_text = (response_generator.get_business_response() 
         #                 if is_business 
         #                 else response_generator.get_regular_response())
@@ -186,6 +165,9 @@ async def webhook(request: Request):
             # "response": response_text,
             # "api_response": response
         }, indent=2))
+
+        # Store the message in the database
+        ai.is_business_proposal(message_text)
 
         if is_business:
             db.insert_message(sender_id, message_text)

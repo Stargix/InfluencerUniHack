@@ -20,6 +20,7 @@ def create_table(name, fields):
 
 def insert_message(user_id, message_text):
     """Insert a new message with a unique message_id"""
+    print("error here")
     for attempt in range(5):  # Retry up to 5 times for locked database
         try:
             con = sqlite3.connect("jobOffers.db")
@@ -38,24 +39,6 @@ def insert_message(user_id, message_text):
         finally:
             con.close()
 
-# def insert_message(sender_id, message_id, message_text):
-#     """Insert a message into the business_prop table."""
-#     try:
-#         con = sqlite3.connect("jobOffers.db")
-#         cur = con.cursor()
-#         cur.execute("PRAGMA foreign_keys = ON")  # Enables foreign key constraints
-        
-#         # Use parameterized query to insert data
-#         cur.execute(
-#             "INSERT INTO business_prop (user_id, message) VALUES (?, ?)",
-#             (sender_id, message_text)
-#         )
-#         con.commit()
-#         print("Message inserted successfully!")
-#     except sqlite3.Error as e:
-#         print(f"An error occurred while inserting message: {e}")
-#     finally:
-#         con.close()
 
 def generate_database():
     """Set up an exemplar database with static data"""
