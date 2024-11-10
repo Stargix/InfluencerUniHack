@@ -7,6 +7,7 @@ import json  # For JSON operations
 import requests  # For making HTTP requests
 from typing import Dict, Any  # For type hints
 from datetime import datetime  # For timestamp generation
+import database as db
 
 # Load environment variables from .env file
 load_dotenv()
@@ -138,7 +139,12 @@ async def webhook(request: Request):
     Process incoming messages and send appropriate responses
     """
     body = await request.json()
-    
+    db_to_create = True
+
+    if db_to_create:
+        db.generate_database()
+        db_created = True
+
     # Verify the webhook is from Instagram
     if body.get("object") != "instagram":
         raise HTTPException(status_code=404, detail="Not an Instagram event")
@@ -181,6 +187,11 @@ async def webhook(request: Request):
             # "api_response": response
         }, indent=2))
 
+        if is_business:
+            db.insert_message(sender_id, message_text)
+        db.print_database_contents()
+
+        print(f"Processed message from {sender_id}")
         return {"status": "success", "is_business": is_business}
 
     except Exception as e:

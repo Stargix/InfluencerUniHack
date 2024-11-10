@@ -3,6 +3,7 @@ print("Module 'database' imported successfully.\n")
 import sqlite3
 import os
 from datetime import datetime
+import time
 import bcrypt
 
 def create_table(name, fields):
@@ -17,29 +18,78 @@ def create_table(name, fields):
     con.commit()
     con.close()
 
-def insert_values(name, values):
-    """Insert the input values into the given table"""
-    con = sqlite3.connect("jobOffers.db")
-    cur = con.cursor()
-    cur.execute("PRAGMA foreign_keys = ON") # ensures there are foreign key constraints
-    cur.execute("INSERT INTO {} VALUES {}".format(name, values))
-    con.commit()
-    con.close()
+def insert_message(user_id, message_text):
+    """Insert a new message with a unique message_id"""
+    for attempt in range(5):  # Retry up to 5 times for locked database
+        try:
+            con = sqlite3.connect("jobOffers.db")
+            cur = con.cursor()
+            cur.execute(
+                "INSERT INTO business_prop (user_id, message) VALUES (?, ?)",
+                (user_id, message_text)
+            )
+            con.commit()
+            break  # Break loop if successful
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e):
+                time.sleep(0.1)  # Wait briefly before retrying
+            else:
+                raise
+        finally:
+            con.close()
 
+# def insert_message(sender_id, message_id, message_text):
+#     """Insert a message into the business_prop table."""
+#     try:
+#         con = sqlite3.connect("jobOffers.db")
+#         cur = con.cursor()
+#         cur.execute("PRAGMA foreign_keys = ON")  # Enables foreign key constraints
+        
+#         # Use parameterized query to insert data
+#         cur.execute(
+#             "INSERT INTO business_prop (user_id, message) VALUES (?, ?)",
+#             (sender_id, message_text)
+#         )
+#         con.commit()
+#         print("Message inserted successfully!")
+#     except sqlite3.Error as e:
+#         print(f"An error occurred while inserting message: {e}")
+#     finally:
+#         con.close()
 
 def generate_database():
     """Set up an exemplar database with static data"""
-    # lists to store the example data
-    tables = "business_prop"
-    # the assumption is made that every measurement is in kg, cm or km, minutes
-    fields = """(user_id INTEGER PRIMARY KEY,
-                  ig_account_name VARCHAR(255) NOT NULL,
-                  offer VARCHAR(225) NULL,
-                  message VARCHAR(225) NOT NULL)"""
-                  
-    # generate database if not already created
-    if os.path.isfile("lightr.db"):
+    table_name = "business_prop"
+    fields = """(
+        message_id INTEGER PRIMARY KEY AUTOINCREMENT,  
+        user_id INTEGER NOT NULL,                      
+        message VARCHAR(225) NOT NULL
+    )"""
+    
+    if os.path.isfile("jobOffers.db"):
         print("Database found. No data generated.\n")
     else:
         print("Database not found. Generating now.\n")
-        create_table(tables, fields)
+        create_table(table_name, fields)
+
+
+def print_database_contents():
+    """Print all records from the 'business_prop' table in the jobOffers.db database."""
+    try:
+        con = sqlite3.connect("jobOffers.db")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM business_prop")
+        rows = cur.fetchall()
+        
+        if not rows:
+            print("No records found in the 'business_prop' table.\n")
+        else:
+            print("Contents of 'business_prop' table:\n")
+            for row in rows:
+                message_id, user_id, message = row  # Updated unpacking
+                print(f"Message ID: {message_id}, User ID: {user_id}, Message: {message}")
+            print("")  # Add a newline at the end
+    except sqlite3.Error as e:
+        print(f"An error occurred while accessing the database: {e}")
+    finally:
+        con.close()
